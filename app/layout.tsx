@@ -6,9 +6,11 @@ const archivo = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-
 const mono = Roboto_Mono({ subsets: ["latin"], weight: "500", variable: "--font-roboto-mono" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://design.taufiqdp.com"),
   title: "Dua Tinta",
   description: "Dua Tinta, the design system of taufiqdp.com: two inks on paper, condensed Archivo type, original-colour photographs.",
-  openGraph: { title: "Dua Tinta", description: "The design system of taufiqdp.com.", url: "https://design.taufiqdp.com" },
+  alternates: { canonical: "/" },
+  openGraph: { title: "Dua Tinta", description: "The design system of taufiqdp.com.", url: "/" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
