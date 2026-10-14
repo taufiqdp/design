@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   description: "Dua Tinta, the design system of taufiqdp.com: two inks on paper, condensed Archivo type, original-colour photographs.",
   alternates: { canonical: "/" },
   openGraph: { title: "Dua Tinta", description: "The design system of taufiqdp.com.", url: "/" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
