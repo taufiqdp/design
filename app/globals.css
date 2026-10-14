@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* inline: utilities read the live --ink/--pop, so a [data-ink] element gets its own pair */
+@theme inline {
+  --font-sans: var(--font-archivo), Arial, sans-serif;
+  --font-mono: var(--font-roboto-mono), Consolas, monospace;
+  --color-ink: var(--ink);
+  --color-pop: var(--pop);
+  --color-paper: var(--paper);
+}
+
+/* Ink pairs: same names and values as app/global.css on taufiqdp.com */
+:root, [data-ink=orange] { --ink: #3255a4; --pop: #ff6c2f; }
+[data-ink=pink] { --ink: #0078bf; --pop: #ff48b0; }
+[data-ink=green] { --ink: #407060; --pop: #ffb511; }
+[data-ink=burgundy] { --ink: #914e72; --pop: #ffe800; }
+[data-ink=black] { --ink: #000; --pop: #ff4c65; }
+:root { --paper: #f4f4f1; }
+
+@layer base {
+  html { background: var(--paper); color: var(--ink); min-width: 360px; }
+  ::selection { background-color: var(--pop); color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  code, pre { font: 500 14px/1.5 var(--font-roboto-mono), Consolas, monospace; }
+  code { padding: 2px 4px; border-radius: 4px; background: color-mix(in srgb, var(--ink) 8%, var(--paper)); }
+  pre { overflow-x: auto; padding: 8px 12px; border-radius: 8px; background: color-mix(in srgb, var(--ink) 5%, var(--paper)); border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent); }
+  pre code { padding: 0; background: none; }
+}
+
+@layer components {
+  .display { text-transform: uppercase; text-wrap: balance; font-weight: 900; font-stretch: 75%; line-height: .9; }
+  .halftone { position: relative; background: var(--pop); }
+  .halftone::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle, var(--ink) 0 38%, transparent 40%) 0 0 / 14px 14px;
+    mask-image: linear-gradient(155deg, #000 10%, #0000 80%);
+  }
+  .eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 12px; }
+  .eq i { width: 3px; height: 100%; background: currentColor; transform-origin: bottom; transform: scaleY(.35); }
+  .eq.playing i { animation: eq .8s ease-in-out infinite alternate; }
+  .eq.playing i:nth-child(2) { animation-delay: -.4s; }
+  .eq.playing i:nth-child(3) { animation-delay: -.2s; }
+  @media (prefers-reduced-motion: reduce) { .eq.playing i { animation: none; } }
+}
+
+@keyframes eq { from { transform: scaleY(.3); } to { transform: scaleY(1); } }
+
+@utility ink-link {
+  text-decoration-line: underline;
+  text-decoration-color: var(--pop);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
